@@ -1,10 +1,10 @@
-Unique Tabs
+Unique Tabs &mdash; Manual Edition
 ===========
 
 (A Chrome Extension)
 --------------------
 
-Upon opening a new tab or navigating to a new page, this extension closes any earlier, duplicate tabs in the same window.
+Upon clicking on this extension's browser icon, this extension closes any earlier, duplicate tabs in the same window.
 
 Before closing the tabs, a notification is displayed. Clicking the notification within a brief delay (~5 seconds) prevents the tabs from being closed.
 
@@ -22,3 +22,4 @@ Feedback and forks welcome.
 
 ---
 &copy; Joey Aghion, [joey@aghion.com](mailto:joey@aghion.com). See [LICENSE.txt](LICENSE.txt).
+&copy; Alex Blandin [alexblandin@pm.me](mailto:alexblandin@pm.me). Forked. See [LICENSE.txt](LICENSE.txt).
