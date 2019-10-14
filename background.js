@@ -41,8 +41,14 @@ chrome.browserAction.onClicked.addListener((details) => {
 
                 // remove individual tabs because passing array that includes closed tabs fails silently
                 duplicates.forEach((duplicate) => {
-                  if (typeof duplicate == 'undefined') return;
-                  chrome.tabs.remove(duplicate.id);
+                  chrome.tabs.get(duplicate.id, (duplicate) => {
+                    // chrome.runtime.onMessage.addListener
+                    if (chrome.runtime.lastError) {
+                      console.log(chrome.runtime.lastError.message);
+                    } else {
+                      chrome.tabs.remove(duplicate.id);
+                    }
+                  });
                 });
               });
               chrome.notifications.clear(notificationId, function () { });

@@ -13,6 +13,7 @@ Installation
 ------------
 
 Visit [Unique Tabs in the Chrome Web Store](https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk). Click _+Add to Chrome_ to install the extension.
+If you want it to happen automatically, visit [the original](https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk).
 
 
 Feedback

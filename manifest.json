@@ -1,6 +1,6 @@
 {
-  "name": "Unique Tabs",
-  "description": "Upon opening a new tab or navigating to a new page, this extension closes any earlier, duplicate tabs in the same window.",
+  "name": "Unique Tabs | Manual Edition",
+  "description": "Upon clicking on this extension's browser icon, this extension closes any earlier, duplicate tabs in the same window. Fork of Unique Tabs.",
   "version": "0.8",
   "background": {
     "scripts": ["background.js"]
