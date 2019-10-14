@@ -1,6 +1,6 @@
 {
   "name": "Unique Tabs | Manual Edition",
-  "description": "Upon clicking on this extension's browser icon, this extension closes any earlier, duplicate tabs in the same window. Fork of Unique Tabs.",
+  "description": "Click on the browser icon, to close any duplicates of the current tabs in the same window. Fork of Unique Tabs.",
   "version": "0.8",
   "background": {
     "scripts": ["background.js"]
