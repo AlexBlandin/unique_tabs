@@ -8,34 +8,9 @@ function compareUrls(left, right) {
   return left.replace(/#.*$/, "") == right.replace(/#.*$/, "");
 }
 
-function onCompleted(details) {
-  if (details.frameId == 0 && details.url && details.url != '' && !details.url.match(/^chrome:\/\//)) {
-    chrome.tabs.get(details.tabId, (tab) => {
-      if (typeof tab == 'undefined') return null;
-      if (tab.url.match(/^view-source:/)) return null;
-
-      chrome.tabs.query({currentWindow: true}, (tabs) => {
-        var duplicates = tabs.filter((t) => {
-          return compareUrls(t.url, details.url) && t.id != tab.id && !t.pinned && t.status == 'complete';
-        });
-        if (duplicates.length) {
-          removeDuplicates(tab, duplicates);
-        }
-      });
-
-      /*chrome.tabs.getAllInWindow(tab.windowId, (tabs) => {
-        var duplicates = tabs.filter((t) => {
-          return compareUrls(t.url, details.url) && t.id != tab.id && !t.pinned && t.status == 'complete';
-        });
-        if (duplicates.length) {
-          removeDuplicates(tab, duplicates);
-        }
-      });*/
-
-    });
-    alert("testing");
-  }
-}
+/*
+  https://developer.chrome.com/extensions/tabs#method-query
+*/
 
 function removeDuplicates(tab, duplicates) {
   var tab_or_tabs = duplicates.length > 1 ? "tabs" : "tab",
@@ -57,7 +32,7 @@ function removeDuplicates(tab, duplicates) {
 
         // remove individual tabs because passing array that includes closed tabs fails silently
         duplicates.forEach((duplicate) => {
-          if (typeof duplicate == 'undefined') continue;
+          if (typeof duplicate == 'undefined') return;
           chrome.tabs.remove(duplicate.id);
         });
       });
@@ -77,5 +52,21 @@ function removeDuplicates(tab, duplicates) {
   });
 }
 
-chrome.browserAction.onClicked.addListener(onCompleted);
+chrome.browserAction.onClicked.addListener((details) => {
+  if (details.id && details.url && details.url != '' && !details.url.match(/^chrome:\/\//)) {
+    chrome.tabs.get(details.id, (tab) => {
+      if (typeof tab == 'undefined') return null;
+      if (tab.url.match(/^view-source:/)) return null;
+      chrome.tabs.query({ currentWindow: true, pinned: false }, (tabs) => {
+        var duplicates = tabs.filter((t) => {
+          return compareUrls(t.url, details.url) && t.id != tab.id && !t.pinned && t.status == 'complete';
+        });
+        if (duplicates.length) {
+          removeDuplicates(tab, duplicates);
+        }
+      });
+    });
+  }
+});
+
 //chrome.webNavigation.onCompleted.addListener(onCompleted);
